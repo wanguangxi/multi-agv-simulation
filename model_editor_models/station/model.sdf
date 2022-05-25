@@ -1,0 +1,343 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='station'>
+    <link name='station3::link'>
+      <kinematic>1</kinematic>
+      <inertial>
+        <pose frame=''>0 0 0.15 0 -0 0</pose>
+        <mass>50</mass>
+        <inertia>
+          <ixx>4.5255</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.45047</iyy>
+          <iyz>0</iyz>
+          <izz>5.64264</izz>
+        </inertia>
+      </inertial>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <self_collide>0</self_collide>
+      <enable_wind>0</enable_wind>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://assembly_station/meshes/assemblyStation.dae</uri>
+            <scale>1.1 1.1 1.1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <shader type='pixel'/>
+        </material>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <transparency>0</transparency>
+        <cast_shadows>1</cast_shadows>
+      </visual>
+      <collision name='collision'>
+        <laser_retro>0</laser_retro>
+        <max_contacts>10</max_contacts>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>/home/one/ariac_ws/src/ARIAC/nist_gear/models/assembly_station/meshes/assemblyStation.dae</uri>
+            <scale>1.1 1.1 1.1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+            <torsional>
+              <coefficient>1</coefficient>
+              <patch_radius>0</patch_radius>
+              <surface_radius>0</surface_radius>
+              <use_patch_radius>1</use_patch_radius>
+              <ode>
+                <slip>0</slip>
+              </ode>
+            </torsional>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+          <contact>
+            <collide_without_contact>0</collide_without_contact>
+            <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+            <collide_bitmask>1</collide_bitmask>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+            <bullet>
+              <split_impulse>1</split_impulse>
+              <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+13</kp>
+              <kd>1</kd>
+            </bullet>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <model name='briefcase_3'>
+      <pose frame=''>0.08 0.095839 1.2 0 -0 0</pose>
+      <static>1</static>
+      <link name='briefcase_3::briefcase'>
+        <kinematic>0</kinematic>
+        <inertial>
+          <pose frame=''>0 0 0.01 0 -0 0</pose>
+          <mass>0.5</mass>
+          <inertia>
+            <ixx>0.0009</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0009</iyy>
+            <iyz>0</iyz>
+            <izz>0.0012</izz>
+          </inertia>
+        </inertial>
+        <sensor name='briefcase_contact' type='contact'>
+          <update_rate>1</update_rate>
+          <contact>
+            <collision>briefcase_collision</collision>
+            <topic>__default_topic__</topic>
+          </contact>
+        </sensor>
+        <collision name='briefcase_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://assembly_briefcase_ariac/meshes/briefcase.dae</uri>
+              <scale>1.1 1.1 1.1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <max_vel>0</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='briefcase_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://assembly_briefcase_ariac/meshes/briefcase.dae</uri>
+              <scale>1.1 1.1 1.1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+      </link>
+      <link name='briefcase_3::assembly_surface_battery'>
+        <pose frame=''>-0.032465 0.174845 0.06 0 -0 0</pose>
+        <collision name='battery_collision'>
+          <geometry>
+            <cylinder>
+              <length>0.003</length>
+              <radius>0.015</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='briefcase_3::assembly_surface_pump'>
+        <pose frame=''>0.032085 -0.152835 0.02 0 -0 0</pose>
+        <collision name='pump_collision'>
+          <geometry>
+            <cylinder>
+              <length>0.003</length>
+              <radius>0.015</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='briefcase_3::assembly_surface_sensor'>
+        <pose frame=''>0.32 0.165 0.09 3.14159 1.56359 3.14159</pose>
+        <collision name='sensor_collision'>
+          <geometry>
+            <cylinder>
+              <length>0.002</length>
+              <radius>0.01</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='briefcase_3::assembly_surface_regulator'>
+        <pose frame=''>-0.217 -0.1532 0.14 0 -0 0</pose>
+        <collision name='regulator_collision'>
+          <geometry>
+            <cylinder>
+              <length>0.002</length>
+              <radius>0.01</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='assembly_battery' filename='libAssemblyPlugin.so'>
+        <contact_check>
+          <attach_steps>1</attach_steps>
+          <alignment_threshold>0.95</alignment_threshold>
+          <min_contact_count>1</min_contact_count>
+        </contact_check>
+        <grippable_model_types>
+          <type>assembly_battery_red</type>
+          <type>assembly_battery_green</type>
+          <type>assembly_battery_blue</type>
+        </grippable_model_types>
+        <assembly_surface_link>briefcase_3::assembly_surface_battery</assembly_surface_link>
+      </plugin>
+      <plugin name='assembly_pump' filename='libAssemblyPlugin.so'>
+        <contact_check>
+          <alignment_threshold>0.95</alignment_threshold>
+          <attach_steps>1</attach_steps>
+          <min_contact_count>1</min_contact_count>
+        </contact_check>
+        <grippable_model_types>
+          <type>assembly_pump_red</type>
+          <type>assembly_pump_green</type>
+          <type>assembly_pump_blue</type>
+        </grippable_model_types>
+        <assembly_surface_link>briefcase_3::assembly_surface_pump</assembly_surface_link>
+      </plugin>
+      <plugin name='assembly_regulator' filename='libAssemblyPlugin.so'>
+        <contact_check>
+          <alignment_threshold>0.95</alignment_threshold>
+          <attach_steps>1</attach_steps>
+          <min_contact_count>1</min_contact_count>
+        </contact_check>
+        <grippable_model_types>
+          <type>assembly_regulator_red</type>
+          <type>assembly_regulator_green</type>
+          <type>assembly_regulator_blue</type>
+        </grippable_model_types>
+        <assembly_surface_link>briefcase_3::assembly_surface_regulator</assembly_surface_link>
+      </plugin>
+      <plugin name='assembly_sensor' filename='libAssemblyPlugin.so'>
+        <contact_check>
+          <alignment_threshold>0.95</alignment_threshold>
+          <attach_steps>1</attach_steps>
+          <min_contact_count>1</min_contact_count>
+        </contact_check>
+        <grippable_model_types>
+          <type>assembly_sensor_red</type>
+          <type>assembly_sensor_green</type>
+          <type>assembly_sensor_blue</type>
+        </grippable_model_types>
+        <assembly_surface_link>briefcase_3::assembly_surface_sensor</assembly_surface_link>
+      </plugin>
+      <plugin name='briefcase_plugin' filename='libROSAriacBriefcasePlugin.so'>
+        <contact_sensor_name>briefcase_contact</contact_sensor_name>
+        <tf_frame_name>briefcase_3</tf_frame_name>
+        <clear_briefcase_service_name>/ariac/briefcase_3/clear_briefcase</clear_briefcase_service_name>
+        <get_content_service_name>/ariac/briefcase_3/get_content</get_content_service_name>
+        <get_connected_part_service_name>/ariac/briefcase_3/get_assembled_parts</get_connected_part_service_name>
+        <update_rate>20</update_rate>
+        <faulty_parts/>
+      </plugin>
+    </model>
+    <joint name='station_briefcase' type='fixed'>
+      <parent>station3::link</parent>
+      <child>briefcase_3::briefcase_3::briefcase</child>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <physics>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <suspension>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </suspension>
+        </ode>
+      </physics>
+    </joint>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

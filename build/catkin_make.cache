@@ -1,0 +1,2 @@
+agv_description:agv_gazebo:wan_app
+-DCATKIN_DEVEL_PREFIX=/home/one/multi_agv_sim/devel -DCMAKE_INSTALL_PREFIX=/home/one/multi_agv_sim/install -G Unix Makefiles

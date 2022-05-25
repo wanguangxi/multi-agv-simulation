@@ -1,0 +1,13 @@
+  <launch>
+    
+    <node pkg="wan_app" type="tf_broadcaster" args="/agv0" name="agv0_tf_broadcaster" /> 
+
+    <node pkg="wan_app" type="tf_broadcaster" args="/agv1" name="agv1_tf_broadcaster" />
+
+    <node pkg="wan_app" type="tf_broadcaster" args="/agv2" name="agv2_tf_broadcaster" />
+
+   
+    <node pkg="wan_app" type="master" args="/agv0" name="master" />
+    <node pkg="wan_app" type="slave"  args="/agv1 0.25" name="slave1" />
+    <node pkg="wan_app" type="slave"  args="/agv2 0.5" name="slave2" />
+  </launch>

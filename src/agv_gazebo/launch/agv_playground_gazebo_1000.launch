@@ -1,0 +1,199 @@
+<launch>
+
+    <!-- 设置launch文件的参数 -->
+    <arg name="world_name" value="$(find agv_gazebo)/worlds/playground.world"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+
+    <!-- 运行gazebo仿真环境 -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_name)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
+
+	
+    <!-- 加载机器人模型描述参数 -->
+
+	<!-- begin robot0 -->
+	<group ns="agv0">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_master.xacro' bodyframe:=agv0 ns:=agv0" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+	
+	<!-- node name="agv_teleop"       pkg="agv_teleop" type="agv_teleop.py"       output="screen" /-->
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv0 -param robot_description -x 0 -y 0"/> 
+   		
+	</group>
+	
+	<!-- begin robot1 -->
+	<group ns="agv1">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv1 ns:=agv1" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv1 -param robot_description -x 0 -y 1"/> 
+	</group>
+
+	<!-- begin robot2 -->
+	<group ns="agv2">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv2 ns:=agv2" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv2 -param robot_description -x 0 -y 2"/> 
+	</group>
+	
+
+	<!-- begin robot3 -->
+	<group ns="agv3">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv3 ns:=agv3" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv3 -param robot_description -x 0 -y 3"/> 
+	</group>
+
+
+	<!-- begin robot4 -->
+	<group ns="agv4">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv4 ns:=agv4" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv4 -param robot_description -x 0 -y 4"/> 
+	</group>
+
+	<!-- begin robot5 -->
+	<group ns="agv5">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv5 ns:=agv5" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv5 -param robot_description -x 0 -y 5"/> 
+	</group>
+
+	<!-- begin robot6 -->
+	<group ns="agv6">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv6 ns:=agv6" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv6 -param robot_description -x 0 -y 6"/> 
+	</group>
+
+	<!-- begin robot7 -->
+	<group ns="agv7">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv7 ns:=agv7" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv7 -param robot_description -x 0 -y 7"/> 
+	</group>
+
+	<!-- begin robot8 -->
+	<group ns="agv8">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv8 ns:=agv8" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv8 -param robot_description -x 0 -y 8"/> 
+	</group>
+
+	<!-- begin robot9 -->
+	<group ns="agv9">
+    	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find agv_description)/urdf/agv_laser_slave.xacro' bodyframe:=agv9 ns:=agv9" /> 
+
+    	<!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+
+    	<!-- 运行robot_state_publisher节点，发布tf  -->
+   		<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <param name="publish_frequency" type="double" value="50.0" />
+		</node>
+
+    	<!-- 在gazebo中加载机器人模型-->
+    	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          	args="-urdf -model agv9 -param robot_description -x 0 -y 9"/> 
+	</group>
+
+</launch>

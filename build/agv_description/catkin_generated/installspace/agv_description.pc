@@ -1,0 +1,8 @@
+prefix=/home/one/multi_agv_sim/install
+
+Name: agv_description
+Description: Description of agv_description
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
